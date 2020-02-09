@@ -16,14 +16,14 @@ class Schedule extends React.Component{
                                 <p className="eating_time">Lunch time: </p>
                                 <div className="schedule_item_container">{arrayTimeDay.map(function(item, i){
                                     return(<li className="item" key={i}>
-                                            <p><button onClick={(e) => {e.preventDefault();that.props.handleTime(e.target.innerHTML)}}>{item}</button></p>
+                                            <p><button onClick={(e) => {e.preventDefault();that.props.handlerTime(e.target.innerHTML)}}>{item}</button></p>
                                         </li>)
                                     })}
                                 </div>
                                 <p className="eating_time">Diner time: </p>
                                 <div className="schedule_item_container">{arrayTimeNight.map(function(item, i){
                                     return(<li className="item" key={i}>
-                                            <p><button onClick={(e) => {e.preventDefault();that.props.handleTime(e.target.innerHTML)}}>{item}</button></p>
+                                            <p><button onClick={(e) => {e.preventDefault();that.props.handlerTime(e.target.innerHTML)}}>{item}</button></p>
                                         </li>)
                                     })}
                                 </div>

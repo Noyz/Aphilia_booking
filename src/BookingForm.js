@@ -13,35 +13,35 @@ class BookingForm extends React.Component{
                                             return(<div className="item" key={1}>You have chosen <span className="reservation_info">{item.table}</span> table sets for the <span className="reservation_info">{item.date.toString().substr(0, 15)}</span> at <span className="reservation_info">{item.time}</span></div>)
                                             })}
                                         <div style={{marginBottom:"20px"}}>Please enter your personnal information:</div>
-                                        <form className="booking_form" onSubmit={(e) => {e.preventDefault();this.props.handleSubmit()}}>
+                                        <form className="booking_form" onSubmit={(e) => {e.preventDefault();this.props.handlerSubmit()}}>
                                             <div className="informations">
                                                 <div className="col-12">
                                                     <div id="civility">
                                                         <label htmlFor="civility">Civility:</label>
                                                         <div style={{marginRight:"2px"}}>
                                                             <label htmlFor="mr">Mr</label>
-                                                            <input className="civility_radio" required name="civility" type="radio" value="Mr"  onChange={this.handleOptionChange}/>
+                                                            <input className="civility_radio" required name="civility" type="radio" value="Mr"  onChange={event => {this.props.handlerCivility(event)}}/>
                                                         </div>
                                                         
 
                                                         <div>
                                                             <label htmlFor="mrs">Mrs</label>
-                                                            <input className="civility_radio" name="civility" type="radio" value="Mrs"  onChange={this.handleOptionChange}/>
+                                                            <input className="civility_radio" name="civility" type="radio" value="Mrs" onChange={event => {this.props.handlerCivility(event)}}/>
                                                         </div>
                                                         
                                                     </div>
                                                 </div>
                                                     <div className="col-12">
                                                         <label htmlFor="firstname">Firstname:</label>
-                                                        <input type="text" id="firstname" onChange={event => {this.props.handleFirstname(event)}}  required/>
+                                                        <input type="text" id="firstname" onChange={event => {this.props.handlerFirstname(event)}}  required/>
                                                     </div>
                                                     <div className="col-12">
                                                         <label htmlFor="Name">Name:</label>
-                                                        <input type="text" id="name" value={this.props.name} onChange={event => {this.props.handleName(event)}} required/>
+                                                        <input type="text" id="name" value={this.props.name} onChange={event => {this.props.handlerName(event)}} required/>
                                                     </div>
                                                     <div className="col-12">
                                                         <label htmlFor="phone">Phone :</label>
-                                                        <input type="number" id="phone" onChange={event => {this.props.handlePhone(event)}} required/>
+                                                        <input type="number" id="phone" onChange={event => {this.props.handlerPhone(event)}} required/>
                                                     </div>
                                             </div>
                                             <button type="submit">Submit</button>

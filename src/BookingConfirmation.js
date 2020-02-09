@@ -12,7 +12,7 @@ class BookingConfirmation extends React.Component{
                                         <h2>Your reservation is confirmed ! </h2>
                                         {this.props.globalInformation.map(function(item, i){
                                             return([<div key={i}>
-                                                <div className="item"  >Hello <span className="">{item.civility}</span> <span>{item.name}</span>
+                                                <div className="item">Hello <span className="">{item.civility}</span> <span>{item.name}</span>
                                                 <br></br>
                                                 We have the pleasure to inform you that your reservation has been confirmed. Please find below the booking details:
                                                 <br></br>
@@ -33,6 +33,7 @@ class BookingConfirmation extends React.Component{
                             }
                     })()}
                 </div>
+                <button style={{marginTop:"20px"}} onClick={(e) => {e.preventDefault();this.props.handlerReset()}}>Go back to homepage</button>
             </div>
         )
     }
