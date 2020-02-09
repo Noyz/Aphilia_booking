@@ -22,8 +22,6 @@ class BookingForm extends React.Component{
                                                             <label htmlFor="mr">Mr</label>
                                                             <input className="civility_radio" required name="civility" type="radio" value="Mr"  onChange={event => {this.props.handlerCivility(event)}}/>
                                                         </div>
-                                                        
-
                                                         <div>
                                                             <label htmlFor="mrs">Mrs</label>
                                                             <input className="civility_radio" name="civility" type="radio" value="Mrs" onChange={event => {this.props.handlerCivility(event)}}/>

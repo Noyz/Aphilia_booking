@@ -62,7 +62,6 @@ class MyReservationApp extends React.Component{
           phone: changeEvent.target.value
         });
     }
-    
     handlerSubmit = (formSubmitEvent) => {
         const newArrayInfo = [];
         const obj = {
@@ -77,7 +76,6 @@ class MyReservationApp extends React.Component{
         var GivenDate = obj.date;
         var CurrentDate = new Date();
         GivenDate = new Date(GivenDate);
-        
         newArrayInfo.push(obj)
         if(GivenDate < CurrentDate){
             alert('Given date is not greater than the current date.');
@@ -99,7 +97,7 @@ class MyReservationApp extends React.Component{
         return(
             <div>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
-                    <h1 className="mylogo" onClick={(e) => {this.handlerChange()}}>My reservationapp</h1>
+                    <h1 className="mylogo">My reservationapp</h1>
                 </nav>
                 {(() => {
                     switch(this.state.reservation === "ok"){

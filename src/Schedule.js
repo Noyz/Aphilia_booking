@@ -14,17 +14,15 @@ class Schedule extends React.Component{
                     switch (this.props.date.getDay() === 2 || this.props.date.getDay() === 6) {
                     case true: return ([<div key={1}>
                                 <p className="eating_time">Lunch time: </p>
-                                <div className="schedule_item_container">{arrayTimeDay.map(function(item, i){
-                                    return(<li className="item" key={i}>
-                                            <p><button onClick={(e) => {e.preventDefault();that.props.handlerTime(e.target.innerHTML)}}>{item}</button></p>
-                                        </li>)
+                                <div className="schedule_item_container">
+                                    
+                                    {arrayTimeDay.map(function(item, i){
+                                    return(<p className="item" key={i}><button onClick={(e) => {e.preventDefault();that.props.handlerTime(e.target.innerHTML)}}>{item}</button></p>)
                                     })}
                                 </div>
                                 <p className="eating_time">Diner time: </p>
                                 <div className="schedule_item_container">{arrayTimeNight.map(function(item, i){
-                                    return(<li className="item" key={i}>
-                                            <p><button onClick={(e) => {e.preventDefault();that.props.handlerTime(e.target.innerHTML)}}>{item}</button></p>
-                                        </li>)
+                                    return(<p className="item" key={i}><button onClick={(e) => {e.preventDefault();that.props.handlerTime(e.target.innerHTML)}}>{item}</button></p>)
                                     })}
                                 </div>
                             </div>
