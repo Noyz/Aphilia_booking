@@ -14,7 +14,7 @@ class BookingPicker extends React.Component{
                             <div className="row">
                                 <div className="table_set_picker col-6" >
                                     <label htmlFor="tablet_set">Tablet_set: </label>
-                                    <select onChange={(e) => {this.props.handlerTableset(e.target.value)}}>
+                                    <select className="styleInput" style={{width:"150px"}} onChange={(e) => {this.props.handlerTableset(e.target.value)}}>
                                         <option value="1">1 table_set</option>
                                         <option value="2">2 table_sets</option>
                                         <option value="3">3 table_sets</option>
@@ -29,10 +29,10 @@ class BookingPicker extends React.Component{
                                         <option value="12">12 table_sets</option>
                                     </select>
                                 </div>
-                                <div className="reservation_date_picker col-6">
-                                    <label>Start date:</label>
-                                    <div>
-                                        <DatePicker 
+                                <div className="col-6" style={{display:"flex"}}>
+                                    <label htmlFor="tablet_set">Date:</label>
+                                    <div className="styleInput" style={{width:"100px", border:"none"}}>
+                                        <DatePicker className="styleInput"
                                         selected={this.props.startDate} 
                                         onChange={this.props.handlerDate}/>
                                     </div>

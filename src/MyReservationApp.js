@@ -58,8 +58,9 @@ class MyReservationApp extends React.Component{
         });
     }
     handlerPhone = (changeEvent) =>{
+        console.log(changeEvent)
         this.setState({
-          phone: changeEvent.target.value
+          phone: changeEvent
         });
     }
     handlerSubmit = (formSubmitEvent) => {
