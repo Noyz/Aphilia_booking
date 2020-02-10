@@ -2,131 +2,133 @@ import React from 'react';
 import './App.css';
 import './bootstrap.min.css';
 import BookingConfirmation from "./BookingConfirmation.js";
-import BookingPicker from "./BookingPicker.js"
+import BookingPicker from "./BookingPicker.js";
+import BookingForm from "./BookingForm.js";
 import "react-datepicker/dist/react-datepicker.css";
-
 
 class MyReservationApp extends React.Component{
     constructor(props){
         super(props)
-        this.handlerTableset = this.handlerTableset.bind(this)
 		this.state = {
             tabletSet:"1",
             startDate: new Date()
         }
     }
-
-    handlerTableset = (changeEvent) =>{
-        this.setState({
-            tabletSet: changeEvent
-        });
-    }
-    handlerDate = date => {
-        this.setState({
-            startDate: date,
-            date:date
-        });
-        this.handlerTime(date)
-    }
-    handlerTime = time =>{
-        const newArrayTime = [];
-        const obj = {
-            table:this.state.tabletSet,
-            date:this.state.startDate,
-            time:time
+    handlerChangeState = (context, value) => {
+        switch(context){
+            case "tableset" : 
+                this.setState({
+                    tabletSet: value
+                });
+            break;
+            case "time" :
+                const newArrayTime = [];
+                const obj = {
+                    table:this.state.tabletSet,
+                    date:this.state.startDate,
+                    time:value
+                }
+                newArrayTime.push(obj);
+                this.setState({
+                    reservationTime: value,
+                    globalReservation:newArrayTime 
+                });
+            break;
+            case "civility":
+                this.setState({
+                    civility: value
+                  });
+            break;
+            case "firstname":
+                this.setState({
+                    firstname: value
+                  });
+            break;
+            case "name":
+                this.setState({
+                    name: value
+                  });
+            break;
+            case "phone":
+                this.setState({
+                    phone: value
+                  });
+            break;
+            case "submit":
+                const newArrayInfo = [];
+                const userInfo = {
+                    table:this.state.tabletSet,
+                    date:this.state.startDate.toString().substr(0, 15),
+                    time:this.state.reservationTime,
+                    civility:this.state.civility,
+                    firstname:this.state.firstname,
+                    name:this.state.name,
+                    phone:this.state.phone
+                }
+                var GivenDate = userInfo.date;
+                var CurrentDate = new Date();
+                GivenDate = new Date(GivenDate);
+                newArrayInfo.push(userInfo)
+                if(GivenDate < CurrentDate){
+                    alert('Given date is not greater than the current date.');
+                    return false;
+                }else{
+                    if(this.state.phone !== undefined){
+                        if(/\+[3]{2}/.test(this.state.phone.replace(/ /g, ""))){
+                            if(this.state.phone.replace(/ /g, "").length === 12){
+                                this.setState({
+                                    reservation: "ok",
+                                    globalInformation:newArrayInfo
+                                });
+                            }else{
+                                alert('The phone number is not complete')
+                            }
+                        }else{
+                            alert('Change the phone indicator to match French country')
+                        }
+                    }else{
+                        alert('No phone number have been entered')
+                    }
+                }
+            break;
+            case "reset":
+                this.setState({
+                    reservation: "nok",
+                    reservationTime:null,
+                    table:null,
+                    date:null,
+                    time:null,
+                    civility:null,
+                    firstname:null,
+                    name:null,
+                    phone:null,
+                    startDate:new Date()
+                });
+            break;
+            default : 
+                this.setState({
+                    startDate: context,
+                    date:context
+                });
+            break;
         }
-        newArrayTime.push(obj);
-        this.setState({
-            reservationTime: time,
-            globalReservation:newArrayTime 
-        });
-    }
-
-    handlerCivility = (changeEvent) =>{
-        this.setState({
-          civility: changeEvent.target.value
-        });
-    }
-    handlerFirstname = (changeEvent) =>{
-        this.setState({
-          firstname: changeEvent.target.value
-        });
-    }
-    handlerName = (changeEvent) =>{
-        this.setState({
-          name: changeEvent.target.value
-        });
-    }
-    handlerPhone = (changeEvent) =>{
-        console.log(changeEvent)
-        this.setState({
-          phone: changeEvent
-        });
-    }
-    handlerSubmit = (formSubmitEvent) => {
-        const newArrayInfo = [];
-        const obj = {
-            table:this.state.tabletSet,
-            date:this.state.startDate.toString().substr(0, 15),
-            time:this.state.reservationTime,
-            civility:this.state.civility,
-            firstname:this.state.firstname,
-            name:this.state.name,
-            phone:this.state.phone
-        }
-        var GivenDate = obj.date;
-        var CurrentDate = new Date();
-        GivenDate = new Date(GivenDate);
-        newArrayInfo.push(obj)
-        if(GivenDate < CurrentDate){
-            alert('Given date is not greater than the current date.');
-            return false;
-        }else{
-            this.setState({
-                reservation: "ok",
-                globalInformation:newArrayInfo
-              });
-        }
-    }
-    handlerReset = (changeEvent) =>{
-        this.setState({
-          reservation: "nok",
-          reservationTime:null
-        });
-    }
+    } 
     render(){
-        return(
-            <div>
+        return(<div className="Application" key={1}>
                 <nav className="navbar navbar-expand-lg navbar-light bg-light">
                     <h1 className="mylogo">My reservationapp</h1>
                 </nav>
-                {(() => {
-                    switch(this.state.reservation === "ok"){
-                        case true : return <BookingConfirmation 
-                            reservation={this.state.reservation} 
-                            startDate={this.state.startDate} 
-                            handlerReset={this.handlerReset} 
-                            globalInformation={this.state.globalInformation}/>
-                        
-                        default: return <BookingPicker 
-                            userName={this.state.name} 
-                            userFirstname={this.state.firstname} 
-                            userPhone={this.state.phone} 
-                            handlerSubmit={this.handlerSubmit} 
-                            handlerDate={this.handlerDate}
-                            handlerPhone={this.handlerPhone} 
-                            handlerFirstname={this.handlerFirstname}
-                            handlerTime={this.handlerTime} 
-                            handlerName={this.handlerName} 
-                            handlerCivility={this.handlerCivility}
-                            handlerTableset={this.handlerTableset}
-                            reservationTime={this.state.reservationTime} 
-                            startDate={this.state.startDate} 
-                            globalReservation={this.state.globalReservation}
-                            selectedOption={this.state.selectedOption}/>
+                {(() => {switch(this.state.reservation !== "ok"){
+                        case true : return ([<div className="content" key={2}>
+                            <BookingPicker handlerChangeState={this.handlerChangeState} data={this.state}/>
+                            <BookingForm handlerChangeState={this.handlerChangeState} data={this.state}/>
+                        </div>
+                        ])
+                        case false : return <BookingConfirmation handlerChangeState={this.handlerChangeState} data={this.state}/>
+                        default:return false;
                     }
                 })()}
-         </div>
+            </div>
         )
     }
 

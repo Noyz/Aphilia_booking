@@ -6,12 +6,12 @@ class BookingConfirmation extends React.Component{
         return(
             <div className="col-12">
                 <div className="row">
-                    {(() => {switch (this.props.reservation === "ok" && (this.props.startDate.getDay() === 2 || this.props.startDate.getDay() === 6)) {
+                    {(() => {switch (this.props.data.reservation === "ok" && (this.props.data.startDate.getDay() === 2 || this.props.data.startDate.getDay() === 6)) {
                                 case true : return ([
-                                    <div id="booking_summary" key="1"  className="container">
+                                    <div id="booking_summary" key={6}  className="container">
                                         <h2>Your reservation is confirmed ! </h2>
-                                        {this.props.globalInformation.map(function(item, i){
-                                            return([<div key={i}>
+                                        {this.props.data.globalInformation.map(function(item, i){
+                                            return([<div key={5}>
                                                 <div className="item">Hello <span className="">{item.civility}</span> <span>{item.name}</span>
                                                 <br></br>
                                                 We have the pleasure to inform you that your reservation has been confirmed. Please find below the booking details:
@@ -33,7 +33,7 @@ class BookingConfirmation extends React.Component{
                             }
                     })()}
                 </div>
-                <button style={{marginTop:"20px"}} onClick={(e) => {e.preventDefault();this.props.handlerReset()}}>Go back to homepage</button>
+                <button style={{marginTop:"20px"}} onClick={(e) => {e.preventDefault();this.props.handlerChangeState("reset")}}>Go back to homepage</button>
             </div>
         )
     }
